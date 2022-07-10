@@ -1,17 +1,30 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
+import '../../shared/polyfills';
+import { AzureFunction, Context, HttpRequest, HttpResponse } from "@azure/functions"
+import { ReflectiveInjector } from "injection-js";
+import { SendMessageHandler } from "../../handlers/send-message-handler";
+import { Enviroment } from "../../shared/enviroment";
+
+const injector = ReflectiveInjector.resolveAndCreate([
+    SendMessageHandler,
+    Enviroment
+]);
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
-    const name = (req.query.name || (req.body && req.body.name));
-    const responseMessage = name
-        ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-        : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
-
+    const res = run(context, req);
     context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: responseMessage
+        ...res
     };
-
 };
 
+export const handlerFactory = (provider: () => SendMessageHandler) => async (context: Context, req: HttpRequest): Promise<HttpResponse> => {
+    const result = await provider().handle(context, req);
+    return result;
+}
+
+export function svbHandlerFactory() {
+    return injector.get(SendMessageHandler);
+}
+
+export const run = handlerFactory(svbHandlerFactory)
 export default httpTrigger;
