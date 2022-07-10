@@ -1,16 +1,14 @@
-import { HttpResponse } from "@azure/core-http";
 import { Context, HttpRequest } from "@azure/functions";
 import { ServiceBusMessage } from "@azure/service-bus";
-//import Context = require("applicationinsights/out/Library/Context");
 import { Injectable } from "injection-js";
-import { Enviroment } from "../shared/enviroment";
+import { Environment } from "../shared/enviroment";
 import { HandlerResponse } from "../shared/responses/HandlerResponse";
 import { ServiceBusProvier } from "../shared/service-bus-provider";
 
 @Injectable()
 export class SendMessageHandler {
     constructor(
-        private readonly env: Enviroment,
+        private readonly env: Environment,
         private readonly svbProvider: ServiceBusProvier) {
     }
     async handle(context: Context, req: HttpRequest): Promise<HandlerResponse> {

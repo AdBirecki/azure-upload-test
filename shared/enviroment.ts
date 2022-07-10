@@ -4,7 +4,7 @@ import ProcessEnv = NodeJS.ProcessEnv;
 export const InjectableProcessEnv = new InjectionToken<ProcessEnv>('ProcessEnv');
 
 @Injectable()
-export class Enviroment {
+export class Environment {
     constructor(@Inject(InjectableProcessEnv) public readonly env: ProcessEnv) {
     }
 

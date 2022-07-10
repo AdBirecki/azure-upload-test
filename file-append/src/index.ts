@@ -2,13 +2,13 @@ import '../../shared/polyfills';
 import { AzureFunction, Context, HttpRequest, HttpResponse } from "@azure/functions"
 import { ReflectiveInjector } from "injection-js";
 import { SendMessageHandler } from "../../handlers/send-message-handler";
-import { Enviroment, InjectableProcessEnv } from "../../shared/enviroment";
+import { Environment as Environment, InjectableProcessEnv } from "../../shared/enviroment";
 import { ServiceBusProvier } from '../../shared/service-bus-provider';
 
 const injector = ReflectiveInjector.resolveAndCreate([
     SendMessageHandler,
     ServiceBusProvier,
-    Enviroment,
+    Environment,
     {
         provide: InjectableProcessEnv,
         useValue: process.env,

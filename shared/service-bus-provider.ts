@@ -1,13 +1,13 @@
 import { ServiceBusClient, ServiceBusMessage, ServiceBusSender } from "@azure/service-bus";
 import { Inject, Injectable } from "injection-js";
-import { Enviroment } from "./enviroment";
+import { Environment } from "./enviroment";
 
 
 @Injectable()
 export class ServiceBusProvier {
     private readonly svbSender: ServiceBusSender;
 
-    constructor(private readonly enviroment: Enviroment) {
+    constructor(private readonly enviroment: Environment) {
         const SERVICE_BUS_CONNECTION = enviroment.getVariable('SERVICE_BUS_CONNECTION');
         const SERVICE_BUS_QUEUE = enviroment.getVariable('SERVICE_BUS_QUEUE_NAME');
 

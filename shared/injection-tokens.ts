@@ -1,5 +1,5 @@
 
 
 import { InjectionToken } from "injection-js";
-import { Enviroment } from "./enviroment";
+import { Environment } from "./enviroment";
 
