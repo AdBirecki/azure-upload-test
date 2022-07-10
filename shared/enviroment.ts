@@ -1,11 +1,11 @@
 import { Inject, Injectable, InjectionToken } from "injection-js";
 import ProcessEnv = NodeJS.ProcessEnv;
 
-export const InjectableProcesEnv = new InjectionToken<ProcessEnv>('ProcesEnv');
+export const InjectableProcessEnv = new InjectionToken<ProcessEnv>('ProcessEnv');
 
 @Injectable()
 export class Enviroment {
-    constructor(@Inject(InjectableProcesEnv) public readonly env: ProcessEnv) {
+    constructor(@Inject(InjectableProcessEnv) public readonly env: ProcessEnv) {
     }
 
     getVariable(key: string): string {
