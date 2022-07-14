@@ -16,7 +16,9 @@ resource "azurerm_servicebus_subscription" "sbsub" {
   max_delivery_count = 3
 }
 
-resource "azurerm_servicebus_topic_authorization_rule" "svbauthrization" {
-  id = azurerm_servicebus_subscription_rule.sbsub.id
+resource "azurerm_servicebus_namespace_authorization_rule" "sb-ar" {
+  namespace_name = azurerm_servicebus_namespace.ab23svbnamespace.resource_group_name
+  name = "servicebus_auth_rule"
+  listen = true
 }
 

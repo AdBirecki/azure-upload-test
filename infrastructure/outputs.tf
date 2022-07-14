@@ -1,3 +1,3 @@
 output "svbconnectionstr" {
-  value = azurerm_servicebus_topic.sbsub.connection
+  value = azurerm_servicebus_subscription.sbsub.id
 }
